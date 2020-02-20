@@ -11,6 +11,7 @@
 				console.log("***CREATED WEBSOCKET");
 				connection.onopen = function(evt) {
 					console.log("***ONOPEN");
+					document.getElementById("input").disabled = false;
 				}
 				connection.onmessage = function(evt) {
 					console.log("***ONMESSAGE");
@@ -26,6 +27,6 @@
 	</header>
 	<body onload="connect()">
 		<p id="output">leer</p>
-		<p><input type="button" value="Klick mich hart!" onclick="send()"></p>
+		<p><input type="button" id="input" value="Klick mich hart!" onclick="send()" disabled></p>
 	</body>
 </html>
