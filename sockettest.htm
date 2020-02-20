@@ -1,0 +1,31 @@
+<html>
+	<header>
+		<title>Test Websocket</title>
+		<script>
+			"use strict"		
+			var connection = null;
+			function connect() {
+				var serverUrl;
+				serverUrl = "ws://" + document.location.hostname + ":2000";
+				connection = new WebSocket(serverUrl, "json");
+				console.log("***CREATED WEBSOCKET");
+				connection.onopen = function(evt) {
+					console.log("***ONOPEN");
+				}
+				connection.onmessage = function(evt) {
+					console.log("***ONMESSAGE");
+					var f = document.getElementById("output").contentDocument;
+					f.write(evt.data);
+				}
+			}
+			function send() {
+				console.log("***SEND");
+				connection.send(JSON.stringify("Hallo Welt!"));
+			}
+		</script>
+	</header>
+	<body onload="connect()">
+		<p id="output">leer</p>
+		<p><input type="button" value="Klick mich hart!" onclick="send()"></p>
+	</body>
+</html>
